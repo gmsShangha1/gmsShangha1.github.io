@@ -1,249 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>炫酷导航页</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #111;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                overflow: hidden;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GMS Exhibition Navigator</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
+            #tsparticles {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
 
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+            .nav-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
 
-        .nav-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-link {
-            position: relative;
-            width: 200px;
-            height: 60px;
-            border-radius: 30px;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-        }
-
-        .nav-link .title {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .nav-link .subtitle {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        @media (max-width: 768px) {
             .nav-link {
-                width: 160px;
-                height: 50px;
-                border-radius: 25px;
+                position: relative;
+                width: 200px;
+                height: 60px;
+                border-radius: 30px;
+                background-color: rgba(255, 255, 255, 0.1);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: white;
             }
 
             .nav-link .title {
-                font-size: 16px;
+                font-size: 18px;
+                margin-bottom: 5px;
             }
 
             .nav-link .subtitle {
-                font-size: 10px;
+                font-size: 12px;
+                color: #aaa;
             }
-        }
-    </style>
-</head>
 
-<body>
-    <div id="particles-js"></div>
-    <div class="nav-container">
-
-        <a href="https://gmsshanghai.surge.sh/" class="nav-link">
-            <span class="title">Surge</span>
-            <span class="subtitle">Surge Stable Version</span>
-        </a>
-
-        
-        <a href="https://gmsshanghai-internal-test.surge.sh/" class="nav-link">
-            <span class="title">Surge Internal</span>
-            <span class="subtitle">Surge Internal Version</span>
-        </a>
-
-        <a href="https://gms-shanghai-exhibition-01.netlify.app/" class="nav-link">
-            <span class="title">Netlify</span>
-            <span class="subtitle">Netlify CI/CD Version</span>
-        </a>
-
-         <a href="https://gmsshangha1.github.io/gms-shanghai-pages/" class="nav-link">
-            <span class="title">Github Page</span>
-            <span class="subtitle">Github Page CI/CD Version</span>
-        </a>
-        
-    </div>
-    <script>
-        particlesJS.load('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    }
-                   
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 4,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 6,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
+            @media (max-width: 768px) {
+                .nav-link {
+                    width: 160px;
+                    height: 50px;
+                    border-radius: 25px;
                 }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
+
+                .nav-link .title {
+                    font-size: 16px;
+                }
+
+                .nav-link .subtitle {
+                    font-size: 10px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <canvas id="canvas"></canvas>
+        <div class="nav-container">
+            <a href="https://gmsshanghai.surge.sh/" class="nav-link">
+                <span class="title">Surge</span>
+                <span class="subtitle">Surge Stable Version</span>
+            </a>
+
+            <a
+                href="https://gmsshanghai-internal-test.surge.sh/"
+                class="nav-link"
+            >
+                <span class="title">Surge Internal</span>
+                <span class="subtitle">Surge Internal Version</span>
+            </a>
+
+            <a
+                href="https://gms-shanghai-exhibition-01.netlify.app/"
+                class="nav-link"
+            >
+                <span class="title">Netlify</span>
+                <span class="subtitle">Netlify CI/CD Version</span>
+            </a>
+
+            <a
+                href="https://gmsshangha1.github.io/gms-shanghai-pages/"
+                class="nav-link"
+            >
+                <span class="title">Github Page</span>
+                <span class="subtitle">Github Page CI/CD Version</span>
+            </a>
+        </div>
+        <script>
+            const particlesConfig = {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800,
+                        },
                     },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
+                    color: {
+                        value: "#ffffff",
                     },
-                    "resize": true
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000",
+                        },
+                        polygon: {
+                            nb_sides: 5,
+                        },
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: {
+                            enable: false,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 4,
+                            size_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        width: 1,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: {
+                            enable: false,
+                            rotateX: 600,
+                            rotateY: 1200,
+                        },
+                    },
                 },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab",
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push",
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        grab: {
+                            distance: 400,
+                            line_linked: {
+                                opacity: 1,
+                            },
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 3,
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4,
+                        },
+                        push: {
+                            particles_nb: 4,
+                        },
+                        remove: {
+                            particles_nb: 2,
+                        },
+                    },
+                },
+                retina_detect: true,
+            };
+
+            (function () {
+                const canvas = document.getElementById("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const particleNum = 100;
+                const lineDistance = 120;
+                const colorRGB = "254, 250, 224";
+                let particles = [];
+                let interactionParticle = null;
+                class Particle {
+                    constructor(x, y, velocityX, velocityY, size, color) {
+                        this.x = x;
+                        this.y = y;
+                        this.velocityX = velocityX;
+                        this.velocityY = velocityY;
+                        this.size = size;
+                        this.color = color;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                    }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) {
+                            this.velocityX *= -1;
                         }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
+                        if (this.y > canvas.height || this.y < 0) {
+                            this.velocityY *= -1;
+                        }
+                        this.x += this.velocityX;
+                        this.y += this.velocityY;
+                        this.draw();
                     }
                 }
-            },
-            "retina_detect": true
-        }, function () {
-            console.log('callback - particles.js config loaded');
-        });
 
-        const navLinks = document.querySelectorAll('.nav-link');
-        gsap.from(navLinks, {
-            opacity: 0,
-            y: 50,
-            stagger: 0.2,
-            duration: 1,
-            ease: 'power3.out'
-        });
+                function getRandomArbitrary(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
 
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                gsap.to(link, {
-                    scale: 1.1,
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    duration: 0.3,
-                    ease: 'power3.out'
-                });
+                function createParticles() {
+                    for (let i = 0; i < particleNum; i++) {
+                        let size = getRandomArbitrary(1, 3);
+                        let x = Math.random() * canvas.width;
+                        let y = Math.random() * canvas.height;
+                        let velocityX = getRandomArbitrary(-2, 2);
+                        let velocityY = getRandomArbitrary(-2, 2);
+                        let color = `rgba(${colorRGB}, ${1 - size / 3})`;
+                        particles.push(
+                            new Particle(
+                                x,
+                                y,
+                                velocityX,
+                                velocityX,
+                                size,
+                                color
+                            )
+                        );
+                    }
+                }
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach((particle) => particle.update());
+                    connect();
+                }
+
+                function connect() {
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const p1 = particles[i];
+                            const p2 = particles[j];
+                            let distance = Math.sqrt(
+                                Math.pow(p1.x - p2.x, 2) +
+                                    Math.pow(p1.y - p2.y, 2)
+                            );
+                            if (distance < lineDistance) {
+                                ctx.strokeStyle = `rgba(${colorRGB}, ${
+                                    1 - distance / lineDistance
+                                })`;
+                                ctx.beginPath();
+                                ctx.lineWidth = 0.8;
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                function bindEvents() {
+                    canvas.addEventListener("mouseout", (e) => {
+                        interactionParticle.x = null;
+                        interactionParticle.y = null;
+                    });
+                    canvas.addEventListener("mouseover", (e) => {
+                        if (!interactionParticle) {
+                            interactionParticle = new Particle(
+                                e.x,
+                                e.y,
+                                0,
+                                0,
+                                2,
+                                `rgba(${colorRGB}, 1)`
+                            );
+                            particles.push(interactionParticle);
+                        }
+                    });
+                    canvas.addEventListener("mousemove", (e) => {
+                        interactionParticle.x = e.x;
+                        interactionParticle.y = e.y;
+                    });
+                }
+
+                bindEvents();
+                createParticles();
+                animate();
+            })();
+
+            const navLinks = document.querySelectorAll(".nav-link");
+            gsap.from(navLinks, {
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power3.out",
             });
 
-            link.addEventListener('mouseleave', () => {
-                gsap.to(link, {
-                    scale: 1,
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    duration: 0.3,
-                    ease: 'power3.out'
+            navLinks.forEach((link) => {
+                link.addEventListener("mouseenter", () => {
+                    gsap.to(link, {
+                        scale: 1.1,
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        duration: 0.3,
+                        ease: "power3.out",
+                    });
+                });
+
+                link.addEventListener("mouseleave", () => {
+                    gsap.to(link, {
+                        scale: 1,
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        duration: 0.3,
+                        ease: "power3.out",
+                    });
                 });
             });
-        });
-    </script>
-</body>
-
+        </script>
+    </body>
 </html>
-    

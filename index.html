@@ -62,6 +62,106 @@
                 color: #aaa;
             }
 
+            /* 新添加的组框样式 */
+            .nav-group {
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 20px;
+                padding: 20px;
+                background-color: rgba(255, 255, 255, 0.05);
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            /* 新添加的注脚文字样式 */
+            .update-time {
+                position: relative;
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.6);
+                cursor: help;
+                padding: 2px 8px;
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .update-time:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .update-time::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 100%;  /* 修改前 */
+                top: 100%;     /* 修改后：改为在元素下方显示 */
+                left: 50%;
+                transform: translateX(-50%);
+                margin-bottom: 5px;
+                margin-top: 5px;  /* 修改后：调整与元素的距离 */
+                padding: 6px 10px;
+                font-size: 12px;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.8);
+                border-radius: 6px;
+                white-space: nowrap;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                z-index: 1000;
+            }
+
+            .update-time::before {
+                content: '';
+                position: absolute;
+                bottom: 100%;  /* 修改前 */
+                top: 100%;     /* 修改后：改为在元素下方显示 */
+                left: 50%;
+                transform: translateX(-50%);
+                margin-bottom: 1px;
+                margin-top: -5px;  /* 修改后：调整箭头位置 */
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid rgba(0, 0, 0, 0.8);  /* 修改前 */
+                border-bottom: 5px solid rgba(0, 0, 0, 0.8);  /* 修改后：调整箭头方向 */
+                border-top: none;  /* 修改后：移除原有的上箭头 */
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                z-index: 1000;
+            }
+
+            .update-time:hover::after,
+            .update-time:hover::before {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .footer-github {
+                position: fixed;
+                bottom: 15px;
+                left: 15px;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.6);
+                text-decoration: none;
+                background-color: rgba(255, 255, 255, 0.05);
+                padding: 5px 10px;
+                border-radius: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+
+            .footer-github:hover {
+                color: rgba(255, 255, 255, 0.9);
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
             @media (max-width: 768px) {
                 .nav-link {
                     width: 160px;
@@ -83,19 +183,25 @@
     <body>
         <canvas id="canvas"></canvas>
         <div class="nav-container">
-            <a href="https://gmsshanghai.surge.sh/" class="nav-link">
-                <span class="title">Surge</span>
-                <span class="subtitle">Surge Stable Version</span>
-            </a>
+            <!-- 将前两个链接放入组框 -->
+            <div class="nav-group">
+                <a href="https://gmsshanghai.surge.sh/" class="nav-link">
+                    <span class="title">Surge</span>
+                    <span class="subtitle">Surge Stable Version</span>
+                </a>
 
-            <a
-                href="https://gmsshanghai-internal-test.surge.sh/"
-                class="nav-link"
-            >
-                <span class="title">Surge Internal</span>
-                <span class="subtitle">Surge Internal Version</span>
-            </a>
+                <a
+                    href="https://gmsshanghai-internal-test.surge.sh/"
+                    class="nav-link"
+                >
+                    <span class="title">Surge Internal</span>
+                    <span class="subtitle">Surge Internal Version</span>
+                </a>
 
+                <div class="update-time" data-tooltip="最后更新时间: 2025-08-27">surge的部署不是实时的,查看最近的部署时间</div>
+            </div>
+
+            <!-- 保留原来的其他链接 -->
             <a
                 href="https://gms-shanghai-exhibition-01.netlify.app/"
                 class="nav-link"
@@ -370,5 +476,7 @@
                 });
             });
         </script>
+         <!-- 添加仓库源码地址注脚 -->
+        <a href="https://github.com/gmsShangha1/gmsShangha1.github.io" class="footer-github" target="_blank">查看仓库源码</a>
     </body>
 </html>
